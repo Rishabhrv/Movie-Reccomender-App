@@ -3,50 +3,49 @@ import pickle
 import requests
 from PIL import Image
 
-movies= pickle.load(open('movie_list.pkl','rb'))
-movies_list = movies['title'].values
-similarty = pickle.load(open('similarity.pkl','rb'))
-top20 = pickle.load(open('top20.pkl','rb'))
-top_grossing = pickle.load(open('top_grossing.pkl','rb'))
+# Load movie data, similarity data, top 20 movies and top grossing movies
+movies = pickle.load(open('movie_list.pkl', 'rb')) 
+movies_list = movies['title'].values # Extract movie titles from movie data
+similarity = pickle.load(open('similarity.pkl', 'rb')) # Load similarity data
+top20 = pickle.load(open('top20.pkl', 'rb')) # Load top 20 movies data
+top_grossing = pickle.load(open('top_grossing.pkl', 'rb')) # Load top grossing movies data
 
-image = Image.open('myimage.jpg')
+image = Image.open('myimage.jpg') # Open the image file that will be displayed later in the app
 
-
+# Function to recommend movies based on the similarity of movies
 def recommend(movie):
-    index = movies[movies['title'] == movie].index[0]
-    distances = sorted(list(enumerate(similarty[index])), reverse=True, key=lambda x: x[1])
-    recommended_movies = []
-    recommended_movie_posters = []
-    for i in distances[1:6]:
-        movie_id = movies.iloc[i[0]].movie_id
-        recommended_movie_posters.append(fetch_poster(movie_id))
-        recommended_movies.append(movies.iloc[i[0]].title)
+    index = movies[movies['title'] == movie].index[0] # Get the index of the movie
+    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1]) # Sort the similarity scores in descending order
+    recommended_movies = [] # Initialize an empty list for recommended movies
+    recommended_movie_posters = [] # Initialize an empty list for recommended movie posters
+    for i in distances[1:6]: # Loop through the top 5 similar movies (excluding the input movie)
+        movie_id = movies.iloc[i[0]].movie_id # Get the movie ID
+        recommended_movie_posters.append(fetch_poster(movie_id)) # Fetch the movie poster and add it to the list of recommended movie posters
+        recommended_movies.append(movies.iloc[i[0]].title) # Add the movie title to the list of recommended movies
+    return recommended_movies, recommended_movie_posters # Return the recommended movies and their posters
 
-    return recommended_movies, recommended_movie_posters
-
-
+# Function to fetch the poster of a movie using an API provided by The Movie Database (TMDb)
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(
-        movie_id)
-    data = requests.get(url)
-    data = data.json()
-    poster_path = data['poster_path']
-    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-    return full_path
+    url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id) # Construct the URL for fetching the movie data
+    data = requests.get(url) # Make an HTTP request to fetch the movie data
+    data = data.json() # Convert the response to a JSON object
+    poster_path = data['poster_path'] # Extract the poster path from the JSON object
+    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path # Construct the URL for the poster image
+    return full_path # Return the URL for the poster image
 
-
+# Function to return the title of a movie along with its release year
 def title(df, index):
-    tit = df['title'].values[index]
-    num = df['year'][index].astype(int)
-    num = num.astype(str)
+    tit = df['title'].values[index] # Extract the movie title
+    num = df['year'][index].astype(int) # Extract the release year as an integer
+    num = num.astype(str) # Convert the release year to a string
+    return tit + ' ' + "(" + num + ")" # Return the title of the movie along with its release year
 
-    return tit + ' ' + "(" + num + ")"
-
-
+# Function to return the rating of a movie from the top 20 movies
 def caption(index):
-    return 'Ratings : ' + top20['vote_average'].values[index].astype(str)
+    return 'Ratings : ' + top20['vote_average'].values[index].astype(str) # Extract the rating of the movie from the top 20 movies and return it as a string
 
 
+#This function takes an index as input and returns the revenue information of the movie located at that index
 def revenew(index):
     return 'Revenue : ' + '$' + top_grossing['revenue'].values[index].astype(str) + 'M'
 
