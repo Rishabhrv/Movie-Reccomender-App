@@ -1,3 +1,41 @@
 # Movie-Reccomender-App
 
-This is **content based Movie Reccomender System** made with the help of Streamlit. If you want to impliment this on your machine kindly contact me for more files. Some files couldn't be upload because of size limit.
+This is a **content-based Movie Recommender System** project that utilizes machine learning techniques to recommend movies to users. The system employs cosine similarity to calculate the similarity scores between movies, and suggests the closest matches to users. The project utilizes the tmdb dataset and provides a user-friendly UI experience through Streamlit.
+**Installation**
+To run this project, please follow the steps below:
+
+Clone the repository to your local machine.
+
+Navigate to the project directory.
+git clone <repository_url>
+cd <project_directory>
+
+Install the required dependencies by running the following command:
+
+pip install -r requirements.txt
+
+**Usage**
+
+Once you have installed the necessary dependencies, you can run the recommender system with the following command:
+
+streamlit run app.py
+
+The above command will launch the Streamlit application, allowing you to interact with the Movie Recommender System.
+
+**File Descriptions**
+This project includes the following files:
+
+**app.py:** This file contains the main code for the Movie Recommender System. It utilizes the tmdb dataset and implements the content-based recommendation algorithm using cosine similarity. The Streamlit library is used to create a user-friendly UI.
+
+**requirements.txt:** This file lists all the required dependencies for running the project. You can install them using the command mentioned in the installation section.
+
+**setup.sh:** This shell script contains the necessary setup configurations for the project.
+
+**Procfile:** This file is used by Heroku (a cloud platform) to specify the commands that should be executed to run the application.
+
+Feel free to explore and modify the code files to suit your requirements.
+
+Additional Information
+Kindly contact me for more files. Some files couldn't be upload because of size limit.
+
+Happy movie recommendations!
