@@ -2,7 +2,7 @@
 
 This is a **content-based Movie Recommender System** project that utilizes machine learning techniques to recommend movies to users. The system employs cosine similarity to calculate the similarity scores between movies, and suggests the closest matches to users. The project utilizes the tmdb dataset and provides a user-friendly UI experience through Streamlit.
 
-# Installation
+## Installation
 To run this project, please follow the steps below:
 
 1. Clone the repository to your local machine.
@@ -14,7 +14,7 @@ Install the required dependencies by running the following command:
 
 **pip install -r requirements.txt**
 
-# Usage
+## Usage
 
 Once you have installed the necessary dependencies, you can run the recommender system with the following command:
 
@@ -22,7 +22,7 @@ Once you have installed the necessary dependencies, you can run the recommender 
 
 The above command will launch the Streamlit application, allowing you to interact with the Movie Recommender System.
 
-# File Descriptions
+## File Descriptions
 This project includes the following files:
 
 **app.py:** This file contains the main code for the Movie Recommender System. It utilizes the tmdb dataset and implements the content-based recommendation algorithm using cosine similarity. The Streamlit library is used to create a user-friendly UI.
@@ -35,7 +35,7 @@ This project includes the following files:
 
 Feel free to explore and modify the code files to suit your requirements.
 
-# Contributing
+## Contributing
 
 We welcome contributions to this project. If you want to contribute, please follow these guidelines:
 
@@ -45,10 +45,10 @@ We welcome contributions to this project. If you want to contribute, please foll
     4. Push your changes to your forked repository.
     5. Create a pull request with a clear description of your changes.
 
-# Contact
+## Contact
 If you have any questions or issues, please contact me at rishabhvyas472@gmail.com
 
-# Additional Information
+## Additional Information
 Kindly contact me for more files. Some files couldn't be upload because of size limit.
 
 Happy movie recommendations!
